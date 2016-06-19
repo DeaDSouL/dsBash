@@ -55,11 +55,11 @@ grep -l "$_DSBASHRC_CMD" ~/.bashrc > /dev/null 2>&1 || echo "$_DSBASHRC_CMD" >> 
 
 source ~/.bash_profile
 
-echo "${BBLUE}dsBash${NC} ${FG}was installed successfullyi !"
+echo -e "${BBLUE}dsBash${NC} ${FG}was installed successfullyi !"
 echo ''
-echo "${FG}The current loaded aliases:"
+echo -e "${FG}The current loaded aliases:"
 ds.alias_loaded
 echo ''
-echo "${FG}To see the available aliases, try:${NC} ${BLUE}ds.alias_all"
-echo "${FG}Enjoy${NC} ${YELLOW}:)"
+echo -e "${FG}To see the available aliases, try:${NC} ${BLUE}ds.alias_all"
+echo -e "${FG}Enjoy${NC} ${YELLOW}:)"
 
