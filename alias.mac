@@ -1,0 +1,161 @@
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# ----------------------------------------------------------------------------
+#  Author: Mubarak Alrashidi (DeaDSouL)
+# Package: dsBash
+#    Info: Setting up your bash environment
+# License: GNU/GPL v3
+#     URL: https://github.com/DeaDSouL/dsBash
+# ----------------------------------------------------------------------------
+
+ds.alias_mac() {
+    # echo ""
+    # echo -e "${BRED}Mac OS X :"
+    # echo "----------"
+
+    # echo -e "${BRED}FILE AND FOLDER MANAGEMENT"
+    echo -e "           ${BBLUE}ds.du${NC} ${FG}:    ${NC}${PURPLE}'du'${NC} ${FG}with hidden files.${NC}"
+
+    # echo "MacPorts Commands"
+    echo -e "      ${BBLUE}ds.portref${NC} ${FG}:    ${NC}${PURPLE}[MacPorts]${NC} ${FG}Update ports repositories.${NC}"
+    echo -e "       ${BBLUE}ds.portup${NC} ${FG}:    ${NC}${PURPLE}[MacPorts]${NC} ${FG}Upgrade outdated packages.${NC}"
+    echo -e "       ${BBLUE}ds.portse${NC} ${FG}:    ${NC}${PURPLE}[MacPorts]${NC} ${FG}Search package.${NC}"
+    echo -e "       ${BBLUE}ds.portin${NC} ${FG}:    ${NC}${PURPLE}[MacPorts]${NC} ${FG}Install packages.${NC}"
+    echo -e "       ${BBLUE}ds.portrm${NC} ${FG}:    ${NC}${PURPLE}[MacPorts]${NC} ${FG}Uninstall packages.${NC}"
+
+    # echo "Misc Mac Commands"
+    echo -e "    ${BBLUE}ds.macfinder${NC} ${FG}:    Opens current directory in MacOS Finder."
+    echo -e "     ${BBLUE}ds.mactrash${NC} ${FG}:    Moves a file to the MacOS trash."
+    echo -e "        ${BBLUE}ds.macql${NC} ${FG}:    Opens any file in MacOS Quicklook Preview."
+    echo -e "    ${BBLUE}ds.machidden${NC} ${FG}:    Show/Hide hidden files in Finder.${NC} ${YELLOW}(options: Show|Hide)${NC}"
+    echo -e "     ${BBLUE}ds.macfhide${NC} ${FG}:    Hide folder or file."
+    echo -e "     ${BBLUE}ds.macfshow${NC} ${FG}:    Show folder or file."
+    echo -e "   ${BBLUE}ds.maccleanls${NC} ${FG}:    Clean up LaunchServices to remove duplicates in the 'Open With' menu."
+    echo -e "  ${BBLUE}ds.macbgssaver${NC} ${FG}:    Run a screensaver on the Desktop."
+    echo -e "        ${BBLUE}ds.macsl${NC} ${FG}:    Search for a file using MacOS Spotlight's metadata."
+
+    echo -e "         ${BBLUE}ds.info${NC} ${FG}:    Print some useful system's informaton.${NC}"
+}
+
+
+
+# ------------------------------------------------------------------------------
+
+# http://askubuntu.com/questions/356902/why-doesnt-this-show-the-hidden-files-folders
+alias ds.du='du -sch .[!.]* * |gsort -h'
+
+# ------------------------------------------------------------------------------
+
+# MacPorts
+# Update ports repositories.
+alias ds.portref='sudo port -v selfupdate'
+
+# Upgrade outdated packages.
+alias ds.portup='sudo port -v upgrade outdated'
+
+# Search package.
+alias ds.portse='port -v search $1'
+
+# Install packages.
+alias ds.portin='sudo port -v install $*'
+
+# Uninstall packages.
+alias ds.portrm='sudo port -v uninstall --follow-dependencies $*'
+
+# ------------------------------------------------------------------------------
+
+# Opens current directory in MacOS Finder.
+alias ds.macfinder='open -a Finder ./'
+
+# ------------------------------------------------------------------------------
+
+# Moves a file to the MacOS trash.
+ds.mactrash() { command mv "$@" ~/.Trash ; }
+
+# ------------------------------------------------------------------------------
+
+# Opens any file in MacOS Quicklook Preview.
+ds.macql() { qlmanage -p "$*" >& /dev/null; }
+
+# ------------------------------------------------------------------------------
+
+# spotlight : Search for a file using MacOS Spotlight's metadata.
+ds.macsl() { mdfind "kMDItemDisplayName == '$@'wc"; }
+
+# ------------------------------------------------------------------------------
+
+# Show/Hide hidden files in Finder.
+# @TODO : check why it's NOT working.
+ds.machidden() {
+    case $1 in
+        [Ss]how)    defaults write com.apple.finder AppleShowAllFiles TRUE;     killall Finder  ;;
+        [Hh]ide)    defaults write com.apple.finder AppleShowAllFiles FALSE;    killall Finder  ;;
+        *)          echo "[ERROR]: Missing parameter [Show|Hide]."                              ;;
+    esac
+}
+
+# ------------------------------------------------------------------------------
+
+# Hide folder or file.
+alias ds.macfhide='chflags hidden '
+
+# Hide folder or file.
+alias ds.macfshow='chflags nohidden '
+
+# ------------------------------------------------------------------------------
+
+# Clean up LaunchServices to remove duplicates in the "Open With" menu.
+alias ds.maccleanls="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+# ------------------------------------------------------------------------------
+
+# Run a screensaver on the Desktop.
+alias ds.macbgssaver='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+
+# ------------------------------------------------------------------------------
+
+# display useful host related informaton
+ds.info() {
+    echo -e "\n${BGREEN}You are logged on ${NC}${FG}$HOSTNAME"
+    echo -e "\n${BGREEN}Additionnal information:${NC}${FG} " ; uname -a
+    echo -e "\n${BGREEN}Users logged on: ("$(w|wc -l)" )${NC}${FG} " ; w -h
+    echo -e "\n${BGREEN}Current date :${NC}${FG} " ; date
+    echo -e "\n${BGREEN}Machine stats :${NC}${FG} " ; uptime
+    echo -e "\n${BGREEN}Current network location :${NC}${FG} " ; scselect
+    echo -e "\n${BGREEN}Public facing IP Address :${NC}${FG} " ; ds.myip2
+    #echo -e "\n${BGREEN}DNS Configuration:${NC}${FG} " ; scutil --dns
+    echo ''
+}
+
+# ------------------------------------------------------------------------------
+
+# 
+
+# ------------------------------------------------------------------------------
+
+# 
+
+# ------------------------------------------------------------------------------
+
+#   to change the password on an encrypted disk image:
+#   ---------------------------------------
+#   hdiutil chpass /path/to/the/diskimage
+
+#   to mount a read-only disk image as read-write:
+#   ---------------------------------------
+#   hdiutil attach example.dmg -shadow /tmp/example.shadow -noverify
+
+#   mounting a removable drive (of type msdos or hfs)
+#   ---------------------------------------
+#   mkdir /Volumes/Foo
+#   ls /dev/disk*   to find out the device to use in the mount command)
+#   mount -t msdos /dev/disk1s1 /Volumes/Foo
+#   mount -t hfs /dev/disk1s1 /Volumes/Foo
+
+#   to create a file of a given size: /usr/sbin/mkfile or /usr/bin/hdiutil
+#   ---------------------------------------
+#   e.g.: mkfile 10m 10MB.dat
+#   e.g.: hdiutil create -size 10m 10MB.dmg
+#   the above create files that are almost all zeros - if random bytes are desired
+#   then use: ~/Dev/Perl/randBytes 1048576 > 10MB.dat
+
+#   More : http://natelandau.com/my-mac-osx-bash_profile/

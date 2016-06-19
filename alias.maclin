@@ -1,0 +1,418 @@
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# ----------------------------------------------------------------------------
+#  Author: Mubarak Alrashidi (DeaDSouL)
+# Package: dsBash
+#    Info: Setting up your bash environment
+# License: GNU/GPL v3
+#     URL: https://github.com/DeaDSouL/dsBash
+# ----------------------------------------------------------------------------
+
+ds.alias_maclin() {
+    # echo ""
+    # echo -e "${BRED}Linux & Mac :${NC}"
+    # echo -e "${BRED}-------------${NC}"
+
+    # echo -e "${BRED}FILE AND FOLDER MANAGEMENT"
+    echo -e "     ${BBLUE}ds.findtext${NC} ${FG}:    Find files containing text. ${NC}${YELLOW}(ex: ds.findtext 'keyword')${NC}"
+    echo -e "         ${BBLUE}ds.ptar${NC} ${FG}:    Parallel compression. ${NC}${YELLOW}(ex: ds.ptar DIR_NAME)${NC} ${PURPLE}[requires: 'lbzip2']${NC}"
+    echo -e "      ${BBLUE}ds.extract${NC} ${FG}:    Extract most know archives.${NC}"
+    echo -e "          ${BBLUE}ds.mcd${NC} ${FG}:    Make and cd into directory.${NC}"
+    echo -e "          ${BBLUE}ds.lsr${NC} ${FG}:    Recursive directory listing.${NC}"
+    echo -e "           ${BBLUE}ds.ls${NC} ${FG}:    ${PURPLE}'ls'${NC} ${FG}with extra info.${NC}"
+    echo -e "         ${BBLUE}ds.less${NC} ${FG}:    Preferred${NC} ${PURPLE}'less'${NC} ${FG}implementation.${NC}"
+    echo -e "         ${BBLUE}ds.cp_p${NC} ${FG}:    ${PURPLE}'cp${NC}' ${FG}with progress bar.${NC}"
+    echo -e "      ${BBLUE}ds.cp_stat${NC} ${FG}:    ${PURPLE}'cp${NC}' ${FG}with statistics.${NC}"
+    # echo ""
+
+    # echo -e "${BRED}SEARCHING"
+    echo -e "         ${BBLUE}ds.find${NC} ${FG}:    Quickly search for file.${NC}"
+    echo -e "        ${BBLUE}ds.finds${NC} ${FG}:    Find file whose name starts with a given string.${NC}"
+    echo -e "        ${BBLUE}ds.finde${NC} ${FG}:    Find file whose name ends with a given string.${NC}"
+    echo -e "        ${BBLUE}ds.which${NC} ${FG}:    Find executables.${NC}"
+    echo -e "${BBLUE}ds.findbadimages${NC} ${FG}:    Find the corrupted images.${NC}"
+    # echo ""
+
+    # echo -e "${BRED}PROCESS MANAGEMENT"
+    echo -e "      ${BBLUE}ds.findps1${NC} ${FG}:    Search for process.${NC} ${PURPLE}(ps -ef)${NC}"
+    echo -e "      ${BBLUE}ds.findps2${NC} ${FG}:    Search for process.${NC} ${PURPLE}(ps aux)${NC}"
+    echo -e "      ${BBLUE}ds.findpid${NC} ${FG}:    Find out the pid of a specified process.${NC}"
+    echo -e "     ${BBLUE}ds.findmyps${NC} ${FG}:    List processes owned by my user.${NC}"
+    echo -e "       ${BBLUE}ds.topmem${NC} ${FG}:    Find memory hogs.${NC}"
+    echo -e "       ${BBLUE}ds.topcpu${NC} ${FG}:    Find CPU hogs.${NC}"
+    echo -e "           ${BBLUE}ds.k9${NC} ${FG}:    Kill 9 process by process-id.${NC}"
+    echo -e "          ${BBLUE}ds.k9n${NC} ${FG}:    Kill 9 process by process-name.${NC}"
+    echo -e "      ${BBLUE}ds.getppid${NC} ${FG}:    Get parent-process-id of current process-id.${NC}"
+    # echo ""
+
+    # echo -e "${BRED}NETWORKING"
+    echo -e "         ${BBLUE}ds.myip${NC} ${FG}:    Public facing IP Address.${NC}"
+    echo -e "        ${BBLUE}ds.myip2${NC} ${FG}:    Get external IP.${NC}"
+    echo -e "       ${BBLUE}ds.oports${NC} ${FG}:    Show all listening connections. The open ports.${NC}"
+    echo -e "      ${BBLUE}ds.netcons${NC} ${FG}:    Show all open TCP/IP sockets.${NC}"
+    echo -e "       ${BBLUE}ds.osocks${NC} ${FG}:    Display open sockets.${NC}"
+    echo -e "       ${BBLUE}ds.osocku${NC} ${FG}:    Display only open UDP sockets.${NC}"
+    echo -e "       ${BBLUE}ds.osockt${NC} ${FG}:    Display only open TCP sockets.${NC}"
+    echo -e "     ${BBLUE}ds.httdebug${NC} ${FG}:    Download a web page and show info on what took time.${NC}"
+    echo -e "       ${BBLUE}ds.yt2mp3${NC} ${FG}:    Youtube video to mp3 file.${NC}"
+    # # echo ""
+
+    # echo -e "${BRED}SYSTEMS OPERATIONS & INFORMATION"
+    echo -e "      ${BBLUE}ds.cleands${NC} ${FG}:    Recursively delete${NC} ${PURPLE}.DS_Store${NC} ${FG}files.${NC}"
+    # echo ""
+
+    # echo "MISC."
+    echo -e "       ${BBLUE}ds.tophis${NC} ${FG}:    Show which commands you use the most.${NC}"
+    echo -e "         ${BBLUE}ds.path${NC} ${FG}:    Echo all executable Paths.${NC}"
+    # echo ""
+}
+
+
+# ------------------------------------------------------------------------------
+
+# Recursive directory listing.
+alias ds.lsr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
+
+# ------------------------------------------------------------------------------
+
+# Parallel compression
+ds.ptar() {
+    zPath="$1"
+    zDir=$(basename "$zPath")
+    zFile="${zDir}.tbz2"
+
+    if [[ ! -e "$zPath" ]]; then
+        echo "[ERROR]: '${zPath}': Doesn't exist."
+    elif [[ -e "${zFile}" ]]; then 
+        echo "[ERROR]: '${zFile}': Already exists."
+    else
+        tar cvf "${zFile}" --use-compress-program lbzip2 "${zPath}"
+    fi
+}
+
+# ------------------------------------------------------------------------------
+
+# Extract most know archives.
+ds.extract () {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)  tar xjf $1      ;;
+            *.tar.gz)   tar xzf $1      ;;
+            *.bz2)      bunzip2 $1      ;;
+            *.rar)      unrar e $1      ;;
+            *.gz)       gunzip $1       ;;
+            *.tar)      tar xf $1       ;;
+            *.tbz2)     tar xjf $1      ;;
+            *.tgz)      tar xzf $1      ;;
+            *.zip)      unzip $1        ;;
+            *.Z)        uncompress $1   ;;
+            *.7z)       7z x $1         ;;
+            *)          echo "'$1' cannot be extracted via ds.extract()" ;;
+        esac
+    else
+        echo "[ERROR]: '$1' is not a valid file"
+    fi
+}
+
+# ------------------------------------------------------------------------------
+
+# Make and cd into directory.
+ds.mcd() {
+    if [[ "$1" ]]; then
+        mkdir -p "$1" && cd "$1";
+    else
+        echo "[ERROR]: Missing directory name."
+    fi
+}
+
+# ------------------------------------------------------------------------------
+
+# Show which commands you use the most.
+alias ds.tophis='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+
+# ------------------------------------------------------------------------------
+
+# Find files containing text.
+ds.findtext() {
+    [[ "$*" ]] && grep -lir "$*" * || echo "[ERROR]: Missing keyword";
+}
+
+# Quickly search for file.
+ds.find() { /usr/bin/find . -iname '*'"$@"'*' ; }
+
+# Find file whose name starts with a given string.
+ds.finds() { /usr/bin/find . -iname "$@"'*' ; }
+
+# Find file whose name ends with a given string.
+ds.finde() { /usr/bin/find . -iname '*'"$@" ; }
+
+# ------------------------------------------------------------------------------
+
+# Search for process (ef).
+ds.findps1() {
+    [[ "$1" ]] && ps -ef | grep $1 || echo "[ERROR]: Missing keyword."
+}
+
+# Search for process (aux).
+ds.findps2() {
+    [[ "$1" ]] && ps aux | grep $1 || echo "[ERROR]: Missing keyword."
+}
+
+# ds.findpid: Find out the pid of a specified process.
+# -------------------------------------------------------
+#   Note that the command name can be specified via a regex
+#   E.g. ds.findpid '/d$/' finds pids of all processes with names ending in
+#   'd' Without the 'sudo' it will only find processes of the current user.
+# -------------------------------------------------------
+ds.findpid () { lsof -t -c "$@" ; }
+
+# List processes owned by my user.
+alias ds.findmyps="ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ;"
+
+# Find memory hogs.
+alias ds.topmem='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
+
+# Find CPU hogs.
+alias ds.topcpu='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
+
+# Kill 9 process by process-id.
+ds.k9() {
+    [[ "$1" ]] && sudo kill -9 "$1" || echo "[ERROR]: Missing PID."
+}
+
+# Kill 9 process by process-name.
+ds.k9n() {
+    [[ "$1" ]] && sudo kill -9 $(pgrep "$1") || echo "[ERROR]: Missing Process-name."
+}
+
+# Get parent-process-id of current process-id.
+ds.getppid() {
+    [[ "$1" ]] && ps -p ${1:-$$} -o ppid= || echo "[ERROR]: Missing PID."
+}
+
+# ------------------------------------------------------------------------------
+
+# Get external IP.
+# alias ds.myip='curl ip.appspot.com'
+ds.myip() {
+    curl ip.appspot.com
+    echo ''
+}
+
+# Public facing IP Address.
+alias ds.myip2='curl ifconfig.me'
+
+# Show all listening connections (Open ports).
+alias ds.oports='lsof -i -P | grep LISTEN'
+
+# Show all open TCP/IP sockets.
+alias ds.netcons='lsof -i'
+
+# Display all open sockets.
+alias ds.osocks='sudo /usr/sbin/lsof -i -P'
+
+# Display only open UDP sockets.
+alias ds.osocku='sudo /usr/sbin/lsof -nP | grep UDP'
+
+# Display only open TCP sockets.
+alias ds.osockt='sudo /usr/sbin/lsof -nP | grep TCP'
+
+# Download a web page and show info on what took time
+ds.httdebug() { /usr/bin/curl $@ -o /dev/null -w "dns: %{time_namelookup} connect: %{time_connect} pretransfer: %{time_pretransfer} starttransfer: %{time_starttransfer} total: %{time_total}\n" ; }
+
+# ------------------------------------------------------------------------------
+
+# Youtube video to mp3 file.
+ds.yt2mp3() {
+    youtube-dl "$1" --extract-audio --title --audio-format mp3
+}
+
+# ------------------------------------------------------------------------------
+
+# Echo all executable Paths.
+alias ds.path='echo -e ${PATH//:/\\n}'
+
+# ------------------------------------------------------------------------------
+
+# 'ls' with extra info.
+alias ds.ls='ls -FGlAhp'
+
+# ------------------------------------------------------------------------------
+
+# Preferred 'less' implementation.
+alias ds.less='less -FSRXc'
+
+# ------------------------------------------------------------------------------
+
+# Find executables.
+alias ds.which='type -all'
+
+# ------------------------------------------------------------------------------
+
+# Recursively delete .DS_Store files.
+ds.cleands() {
+    # Works on linux & mac
+    find . -type f -name '*.DS_Store' -ls -delete
+    # find . -type f \( -iname '*DS_Store' -o -name '.AppleDouble' -o -iname '.AppleDB' -o -iname '.AppleDesktop' \) -exec rm -fv {} \;
+    # find . \( -iname '*DS_Store' -o -name '.AppleDouble' -o -iname '.AppleDB' -o -iname '.AppleDesktop' \) -exec rm -rfv {} \;
+
+    # Source: http://osxdaily.com/2012/07/05/delete-all-ds-store-files-from-mac-os-x/
+    # find . -name ".DS_Store" -depth -exec rm {} \;
+}
+
+# ------------------------------------------------------------------------------
+
+#
+ds.findbadimages() {
+    oput='corrupted_'`date +%s%N`'.txt'
+    # while read f; do
+    #   identify "$f" > /dev/null || echo "$f" >> "${oput}"
+    # done < <(find . -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.bmp' \))
+    # < <( ) is a Process Substitution, $() is a command substitution and <<< is a here-string.
+    # read: http://unix.stackexchange.com/a/52027
+    # ----------------------------
+    find . -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.bmp' \) -print0 | while read -d '' -r f; do
+        identify "$f" > /dev/null || echo "$f" >> "${oput}"
+    done
+    # ----------------------------
+    # for f in $(find . -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.bmp' \)); do
+    #   identify "$f" > /dev/null || echo "$f" >> "${oput}"
+    # done
+    # the fastest... althoug not secure
+    # read: http://askubuntu.com/a/343753
+    echo "Created: ${oput}"
+}
+
+# ------------------------------------------------------------------------------
+
+# URL: https://chris-lamb.co.uk/posts/can-you-get-cp-to-give-a-progress-bar-like-wget
+ds.cp_p() {
+    strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
+    | awk '{
+        count += $NF
+        if (count % 10 == 0) {
+            percent = count / total_size * 100
+            printf "%3d%% [", percent
+            for (i=0;i<=percent;i++)
+                printf "="
+            printf ">"
+            for (i=percent;i<100;i++)
+                printf " "
+            printf "]\r"
+        }
+    }
+    END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+}
+
+# ------------------------------------------------------------------------------
+
+# URL: http://unix.stackexchange.com/questions/65077/is-it-possible-to-see-cp-speed-and-percent-copied
+# based on `pv` 
+#   aptitude install pv     urpmi pv        dnf install pv
+#   yum install pv          zypper in pv
+ds.cp_stat () {
+    tar -cf - "${@: 1: $#-1}" |
+    pv -s "$( du -cs -BK --apparent-size "${@: 1: $#-1}" |
+    tail -n 1 |
+    cut -d "$(echo -e "\t")" -f 1)" |
+    ( cd "${@: $#}"; tar -xf - )
+}
+
+# ------------------------------------------------------------------------------
+
+# 
+
+# ------------------------------------------------------------------------------
+
+# 
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#
+
+# ------------------------------------------------------------------------------
+
+#

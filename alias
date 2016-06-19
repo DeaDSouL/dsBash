@@ -1,0 +1,59 @@
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# ----------------------------------------------------------------------------
+#  Author: Mubarak Alrashidi (DeaDSouL)
+# Package: dsBash
+#    Info: Setting up your bash environment
+# License: GNU/GPL v3
+#     URL: https://github.com/DeaDSouL/dsBash
+# ----------------------------------------------------------------------------
+
+ds.alias_loaded() {
+    [[ "$load_linux" = true ]] && echo -e " Linux : ${BGREEN}True${NC}" || echo -e " Linux : ${BRED}False${NC}"
+    [[ "$load_mac" = true ]] && echo -e " MacOS : ${BGREEN}True${NC}" || echo -e " MacOS : ${BRED}False${NC}"
+    [[ "$load_maclin" = true ]] && echo -e "MacLin : ${BGREEN}True${NC}" || echo -e "MacLin : ${BRED}False${NC}"
+}
+
+# ----------------------------------------------------------------------------
+
+ds.alias_all() {
+    # echo -e "${BRED}Main Commands:"
+    echo -e " ${BBLUE}ds.alias_loaded${NC} ${FG}:    Showing the loaded aliases."
+    echo -e "  ${BBLUE}ds.alias_linux${NC} ${FG}:    Listing the available Linux aliases."
+    echo -e "    ${BBLUE}ds.alias_mac${NC} ${FG}:    Listing the available MacOSX aliases."
+    echo -e " ${BBLUE}ds.alias_maclin${NC} ${FG}:    Listing the available both aliases."
+    echo -e "   ${BBLUE}ds.alias_info${NC} ${FG}:    Show info about alias.${NC} ${YELLOW}(ex: ds.alias_info ds.findtext)${NC}"
+    # echo ""
+    [[ "$load_linux" = true ]] && ds.alias_linux;
+    [[ "$load_mac" = true ]] && ds.alias_mac;
+    [[ "$load_maclin" = true ]] && ds.alias_maclin;
+}
+
+# ----------------------------------------------------------------------------
+
+ds.alias_info() {
+    #ds.alias_all | grep -i "^$1" || echo 'invalid input! Try: ds.alias_all'
+    ds.alias_all | grep -i "$1" || echo 'invalid input! Try: ds.alias_all'
+}
+
+# ----------------------------------------------------------------------------
+
+# Shortcut to ds.aliasl_all
+ds.() {
+    ds.alias_all
+}
+
+# ----------------------------------------------------------------------------
+
+# Misc aliases
+
+# More Colors
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Better ls
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# ----------------------------------------------------------------------------
