@@ -53,6 +53,7 @@ grep -l "$_DSBASHRC_CMD" ~/.bashrc > /dev/null 2>&1 || echo "$_DSBASHRC_CMD" >> 
 
 # ---------------------------------------------------------------------
 
+# @TODO: fixing the requirement of logout and login of user!!
 source ~/.bash_profile
 
 echo -e "${BBLUE}dsBash${NC} ${FG}was installed successfullyi !"
