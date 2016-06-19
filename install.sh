@@ -43,7 +43,7 @@ DSBASHDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 _BASH_PROFILE_CMD='[[ -f ~/.profile ]] && source ~/.profile;'
 _PROFILE_CMD='[[ -f ~/.bashrc ]] && source ~/.bashrc;'
-_DSBASHRC_CMD="[[ -f ${DSBASHDIR}/bashrc ]] && source ${DSBASHDIR}/bashrc;"
+_DSBASHRC_CMD="[[ -f '${DSBASHDIR}/bashrc' ]] && source '${DSBASHDIR}/bashrc';"
 
 # ---------------------------------------------------------------------
 
