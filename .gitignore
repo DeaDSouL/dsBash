@@ -1,0 +1,9 @@
+# Backups
+*.swp
+*.bkp
+*.bak
+*~
+
+# Other files and folders
+.DS_Store
+
