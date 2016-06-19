@@ -1,0 +1,94 @@
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# ----------------------------------------------------------------------------
+#  Author: Mubarak Alrashidi (DeaDSouL)
+# Package: dsBash
+#    Info: Setting up your bash environment
+# License: GNU/GPL v3
+#     URL: https://github.com/DeaDSouL/dsBash
+# ----------------------------------------------------------------------------
+
+export PATH="${HOME}/bin:${PATH}"
+
+# ----------------------------------------------------------------------------
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=9999999
+HISTFILESIZE=9999999
+
+# ----------------------------------------------------------------------------
+
+# Change Prompt
+
+#export PS1="\h:\W \u\$"
+#export PS2=">"
+
+#export PS1="________________________________________________________________________________\n| \w @ \h (\u) \n| => "
+#export PS2="| => "
+
+#export PS1="________________________________________________________________________________\n| \[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$\[\033[00m\] \n| => "
+#export PS2="| => "
+
+export PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$\[\033[00m\] "
+export PS2="| => "
+
+# ----------------------------------------------------------------------------
+
+#   Set Default Editor (change 'vim' to the editor of your choice)
+
+export EDITOR=/usr/bin/vim
+export VISUAL=/usr/bin/vim
+
+# ----------------------------------------------------------------------------
+
+#   Set default blocksize for ls, df, du
+#   from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
+
+export BLOCKSIZE=1k
+
+# ----------------------------------------------------------------------------
+
+# Setting colors to PAGER (manual pages)
+# Less Colors for Man Pages
+# Source: https://wiki.archlinux.org/index.php/man_page#Using_less_.28Recommended.29
+
+# export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
+# export LESS_TERMCAP_md=$'\e[01;38;5;74m'  # begin bold
+# export LESS_TERMCAP_me=$'\e[0m'           # end mode
+# export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
+# export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
+# export LESS_TERMCAP_ue=$'\e[0m'           # end underline
+# export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
+
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
+# ----------------------------------------------------------------------------
+
+
+
+# ----------------------------------------------------------------------------
+
+
+
+# ----------------------------------------------------------------------------
+
+
+
+# ----------------------------------------------------------------------------
+
+
+
+# ----------------------------------------------------------------------------
+
