@@ -53,6 +53,7 @@ ds.alias_maclin() {
     echo -e "       ${BBLUE}ds.osocku${NC} ${FG}:    Display only open UDP sockets.${NC}"
     echo -e "       ${BBLUE}ds.osockt${NC} ${FG}:    Display only open TCP sockets.${NC}"
     echo -e "     ${BBLUE}ds.httdebug${NC} ${FG}:    Download a web page and show info on what took time.${NC}"
+    echo -e "     ${BBLUE}ds.wgetlist${NC} ${FG}:    Parallel wget urls list in a file.${NC}"
     echo -e "       ${BBLUE}ds.yt2mp3${NC} ${FG}:    Youtube video to mp3 file.${NC}"
     # # echo ""
 
@@ -65,7 +66,6 @@ ds.alias_maclin() {
     echo -e "         ${BBLUE}ds.path${NC} ${FG}:    Echo all executable Paths.${NC}"
     # echo ""
 }
-
 
 # ------------------------------------------------------------------------------
 
@@ -219,6 +219,23 @@ alias ds.osockt='sudo /usr/sbin/lsof -nP | grep TCP'
 # Download a web page and show info on what took time
 ds.httdebug() { /usr/bin/curl $@ -o /dev/null -w "dns: %{time_namelookup} connect: %{time_connect} pretransfer: %{time_pretransfer} starttransfer: %{time_starttransfer} total: %{time_total}\n" ; }
 
+# Parallel wget urls list in a file
+ds.wgetlist() {
+    case "$1" in
+        -h|--help|h|help)
+            echo 'USAGE: ds.wgetlist URLS_FILE'
+            ;;
+        *)
+            if [[ -z "$1" ]]; then
+                echo 'Missing: URLs file!'
+            elif [[ ! -f "$1" ]]; then
+                echo 'URLs file does not exist!'
+            else
+                cat "$1" | parallel -t -v -j 4 --gnu "wget -c {}"
+            fi
+            ;;
+    esac
+}
 # ------------------------------------------------------------------------------
 
 # Youtube video to mp3 file.
