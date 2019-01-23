@@ -15,7 +15,7 @@ ds.alias_maclin() {
     # echo -e "${BRED}FILE AND FOLDER MANAGEMENT"
     echo -e "     ${BBLUE}ds.findtext${NC} ${FG}:    Find files containing text. ${NC}${YELLOW}(ex: ds.findtext 'keyword')${NC}"
     echo -e "         ${BBLUE}ds.ptar${NC} ${FG}:    Parallel compression. ${NC}${YELLOW}(ex: ds.ptar DIR_NAME)${NC} ${PURPLE}[requires: 'lbzip2']${NC}"
-    echo -e "      ${BBLUE}ds.extract${NC} ${FG}:    Extract most know archives.${NC}"
+    echo -e "      ${BBLUE}ds.extract${NC} ${FG}:    Extract most known archives.${NC}"
     echo -e "          ${BBLUE}ds.mcd${NC} ${FG}:    Make and cd into directory.${NC}"
     echo -e "          ${BBLUE}ds.lsr${NC} ${FG}:    Recursive directory listing.${NC}"
     echo -e "           ${BBLUE}ds.ls${NC} ${FG}:    ${PURPLE}'ls'${NC} ${FG}with extra info.${NC}"
