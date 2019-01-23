@@ -41,6 +41,7 @@ ds.alias_maclin() {
     echo -e "       ${BBLUE}ds.topcpu${NC} ${FG}:    Find CPU hogs.${NC}"
     echo -e "           ${BBLUE}ds.k9${NC} ${FG}:    Kill 9 process by process-id.${NC}"
     echo -e "          ${BBLUE}ds.k9n${NC} ${FG}:    Kill 9 process by process-name.${NC}"
+    echo -e "       ${BBLUE}ds.k9user${NC} ${FG}:    Kill 9 user by user-name.${NC}"
     echo -e "      ${BBLUE}ds.getppid${NC} ${FG}:    Get parent-process-id of current process-id.${NC}"
     # echo ""
 
@@ -183,6 +184,13 @@ ds.k9() {
 # Kill 9 process by process-name.
 ds.k9n() {
     [[ "$1" ]] && sudo kill -9 $(pgrep "$1") || echo "[ERROR]: Missing Process-name."
+}
+
+# Kill 9 all process by user (logs him out)
+ds.k9user() {
+    #su -c 'pkill -KILL -u $1'
+    su -c "pkill -KILL -u $1"
+    #sudo pkill -KILL -u "$1"
 }
 
 # Get parent-process-id of current process-id.
