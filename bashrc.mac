@@ -8,13 +8,16 @@
 # ----------------------------------------------------------------------------
 
 # B1FreeArchiver
-export PATH="/Applications/B1FreeArchiver.app/Contents/MacOS:${PATH}"
+PATH="/Applications/B1FreeArchiver.app/Contents/MacOS:${PATH}"
 
 # MacPorts
-export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
+PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
 
 # MySQL (OSX Builtin)
-export PATH="/usr/local/:/usr/local/sbin:/usr/local/mysql/bin:${PATH}"
+PATH="/usr/local/:/usr/local/sbin:/usr/local/mysql/bin:${PATH}"
+
+PATH="${HOME}/bin:${PATH}"
+export PATH
 
 # ----------------------------------------------------------------------------
 
