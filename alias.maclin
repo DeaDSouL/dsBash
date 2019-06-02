@@ -137,13 +137,13 @@ ds.secure-tar () {
             -c|c|compress|--compress)
                 # Removing first argument
                 unset args[0]
-                # Removes the slash at the end
+                # Removing the slash at the end
                 defOutName="${2%*/}.tar.gz"
                 # get an input from the user
                 read -p "Output filename? [${defOutName}] : " userOutName
                 # decide which name should we use for the output
                 if [ -z "$userOutName" ]; then
-                    # it is empty, then used the default one.
+                    # if it is empty, then used the default one.
                     outputName="$defOutName"
                 else
                     outputName="${userOutName%*/}"
