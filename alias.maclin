@@ -16,6 +16,7 @@ ds.alias_maclin() {
     echo -e "     ${BBLUE}ds.findtext${NC} ${FG}:    Find files containing text. ${NC}${YELLOW}(ex: ds.findtext 'keyword')${NC}"
     echo -e "         ${BBLUE}ds.ptar${NC} ${FG}:    Parallel compression. ${NC}${YELLOW}(ex: ds.ptar DIR_NAME)${NC} ${PURPLE}[requires: 'lbzip2']${NC}"
     echo -e "      ${BBLUE}ds.extract${NC} ${FG}:    Extract most known archives.${NC}"
+    echo -e "   ${BBLUE}ds.secure-tar${NC} ${FG}:    Secure compressing file(s)/directories with a password using 'OpenSSL'.${NC}"
     echo -e "          ${BBLUE}ds.mcd${NC} ${FG}:    Make and cd into directory.${NC}"
     echo -e "          ${BBLUE}ds.lsr${NC} ${FG}:    Recursive directory listing.${NC}"
     echo -e "           ${BBLUE}ds.ls${NC} ${FG}:    ${PURPLE}'ls'${NC} ${FG}with extra info.${NC}"
@@ -112,6 +113,53 @@ ds.extract () {
         esac
     else
         echo "[ERROR]: '$1' is not a valid file"
+    fi
+}
+
+# ------------------------------------------------------------------------------
+
+# Secure tar
+ds.secure-tar () {
+    showHelp() {
+        echo "USING: ds.secure-tar"
+        echo "  options:"
+        echo "      c,compress      to compress files/dirs."
+        echo "      e,extract       to extract a compressed file."
+        echo "  examples:"
+        echo "      ds.secure-tar c dirOrFiles_to_compress"
+        echo "      ds.secure-tar e compressed_file"
+    }
+    if [ $# -lt 2 ]; then
+        showHelp
+    else
+        args=("$@")
+        case $1 in
+            -c|c|compress|--compress)
+                # Removing first argument
+                unset args[0]
+                # Removes the slash at the end
+                defOutName="${2%*/}.tar.gz"
+                # get an input from the user
+                read -p "Output filename? [${defOutName}] : " userOutName
+                # decide which name should we use for the output
+                if [ -z "$userOutName" ]; then
+                    # it is empty, then used the default one.
+                    outputName="$defOutName"
+                else
+                    outputName="${userOutName%*/}"
+                fi
+                # finally, do the magic
+                tar -zcf - "${args[@]}" | openssl enc -e -aes256 -out "${outputName}"
+                ;;
+            -e|e|extract|--extract)
+                if [ -f "$2" ]; then
+                    openssl enc -d -aes256 -in "$2" | tar -xz
+                else
+                    showHelp
+                fi
+                ;;
+            *)  showHelp    ;;
+        esac
     fi
 }
 
