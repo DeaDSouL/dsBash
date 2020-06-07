@@ -7,6 +7,8 @@
 #     URL: https://github.com/DeaDSouL/dsBash
 # ----------------------------------------------------------------------------
 
+# ----------------------------------------------------------------------------
+# PATH #{{{
 # B1FreeArchiver
 PATH="/Applications/B1FreeArchiver.app/Contents/MacOS:${PATH}"
 
@@ -18,37 +20,13 @@ PATH="/usr/local/:/usr/local/sbin:/usr/local/mysql/bin:${PATH}"
 
 PATH="${HOME}/bin:${PATH}"
 export PATH
-
-# ----------------------------------------------------------------------------
-
-#   Add color to terminal
-#   (this is all commented out as I use Mac Terminal Profiles)
-#   from http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
+#}}}
+# Add color to terminal #{{{
+# (this is all commented out as I use Mac Terminal Profiles)
+# from http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-
+#}}}
 # ----------------------------------------------------------------------------
 
-
-
-# ----------------------------------------------------------------------------
-
-
-
-# ----------------------------------------------------------------------------
-
-
-
-# ----------------------------------------------------------------------------
-
-
-
-# ----------------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------------
-
-
-
-# ----------------------------------------------------------------------------

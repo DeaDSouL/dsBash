@@ -25,8 +25,7 @@ TERMBG='dark' # light | dark
 
 
 # ----------------------------------------------------------------------------
-
-# getting the real script's directory
+# getting the real script's directory #{{{
 # source: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -47,17 +46,11 @@ DSBASHDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 #    echo "DIR '$RDIR' resolves to '$DSBASHDIR'"
 #fi
 #echo "DIR is '$DSBASHDIR'"
-
-# ----------------------------------------------------------------------------
-
-# http://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
-# http://stackoverflow.com/questions/394230/detect-the-os-from-a-bash-script
-
-# ----------------------------------------------------------------------------
-
+#}}}
+# Loading bash & alias configurations #{{{
 [[ -f "${DSBASHDIR}/alias" ]] && source "${DSBASHDIR}/alias";
 
-# should load maclin first always
+# Note: maclin always should be loaded first
 case $OSTYPE in
     linux-gnu)
         [[ -f "${DSBASHDIR}/bashrc.maclin" ]] && source "${DSBASHDIR}/bashrc.maclin";
@@ -84,9 +77,8 @@ case $OSTYPE in
         echo "${OSTYPE} : Unknown Operating System!"
     ;;
 esac
-
-# ----------------------------------------------------------------------------
-
+#}}}
+# Colors #{{{
 # Usage: echo -e '${BRed}test'
 # Reset
 NC=${osesche}'[0m'              # No Color: Text Reset
@@ -153,13 +145,22 @@ ON_IBLUE=${osesche}'[0;104m'    # Blue
 ON_IPURPLE=${osesche}'[0;105m'  # Purple
 ON_ICYAN=${osesche}'[0;106m'    # Cyan
 ON_IWHITE=${osesche}'[0;107m'   # White
-
-# ----------------------------------------------------------------------------
-
+#}}}
+# Setting FG color #{{{
 if [[ $TERMBG == 'light' ]]; then 
     FG=${BLACK}
 else
     FG=${WHITE}
 fi
+#}}}
+# ----------------------------------------------------------------------------
+
+
+
+
 
 # ----------------------------------------------------------------------------
+# Notes & URLs #{{{
+# http://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
+# http://stackoverflow.com/questions/394230/detect-the-os-from-a-bash-script
+#}}}
