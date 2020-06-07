@@ -23,6 +23,14 @@ Once you cloned the repo, do the following
 That's it :)
 
 
+### How to use it?
+
+To list all available aliases:
+
+```
+$ ds.aliasLall
+```
+
 ### The idea of dsBash
 To have an easy way to setup your bash environment cross your `Linux` distros and `MacOSX` to act the way you used to, and have your custom aliases
 
