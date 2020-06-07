@@ -14,6 +14,24 @@ I'm using the Vim's `marker` method to fold/unfold sections in the source code. 
 ```
 To toggle folding use `za`.
 
+
+### The idea of dsBash
+To have an easy way to setup your bash environment cross your `Linux` distros and `MacOSX` to act the way you used to, and have your custom aliases
+
+
+### dsBash files:
+    Has two main types:
+        1. `alias`: which will contain your aliases, categorized in 3 sections
+            A. Aliases that would work on `Linux`, should be in `alias.linux`
+            B. Aliases that would work on `MacOSX`, should be in `alias.mac`
+            C. Aliases that would work on both `Linux` and `MacOSX`, should be in `alias.maclin`
+        2. `bashrc` which will contain your bashrc
+            The same concept of `aliases` applies to `bashrc.linux`, `bashrc.mac` and `bashrc.maclin`
+
+    After installation, it will automatically detect your operating system and loads the right `aliases` and `bashrcs` 
+    So that it can work fine on both `Linux` and `MacOSX`.
+
+
 ### Installation
 Once you cloned the repo, do the following
 
@@ -69,22 +87,6 @@ E.g: Searching for work 'kill':
           ds.k9n :    Kill 9 process by process-name.
        ds.k9user :    Kill 9 user by user-name.
 ```
-
-### The idea of dsBash
-To have an easy way to setup your bash environment cross your `Linux` distros and `MacOSX` to act the way you used to, and have your custom aliases
-
-
-### dsBash files:
-    Has two main types:
-        1. `alias`: which will contain your aliases, categorized in 3 sections
-            A. Aliases that would work on `Linux`, should be in `alias.linux`
-            B. Aliases that would work on `MacOSX`, should be in `alias.mac`
-            C. Aliases that would work on both `Linux` and `MacOSX`, should be in `alias.maclin`
-        2. `bashrc` which will contain your bashrc
-            The same concept of `aliases` applies to `bashrc.linux`, `bashrc.mac` and `bashrc.maclin`
-
-    After installation, it will automatically detect your operating system and loads the right `aliases` and `bashrcs` 
-    So that it can work fine on both `Linux` and `MacOSX`.
 
 
 ### Finally,...
