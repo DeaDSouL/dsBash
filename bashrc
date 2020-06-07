@@ -1,4 +1,4 @@
-# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker filetype=bash
 # ----------------------------------------------------------------------------
 #  Author: Mubarak Alrashidi (DeaDSouL)
 # Package: dsBash

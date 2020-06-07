@@ -1,4 +1,4 @@
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker filetype=bash
 # ----------------------------------------------------------------------------
 #  Author: Mubarak Alrashidi (DeaDSouL)
 # Package: dsBash
@@ -7,6 +7,7 @@
 #     URL: https://github.com/DeaDSouL/dsBash
 # ----------------------------------------------------------------------------
 
+# ----------------------------------------------------------------------------
 # ds.alias_loaded:  Show the loaded aliases OS type #{{{
 ds.alias_loaded() {
     [[ "$load_linux" = true ]] && echo -e " Linux : ${BGREEN}True${NC}" || echo -e " Linux : ${BRED}False${NC}"
@@ -38,7 +39,6 @@ ds.alias_search() {
         ds.alias_all | grep -i "$1" || echo 'Nothing found'
     fi
 } #}}}
-
 # ----------------------------------------------------------------------------
 
 # Files & Folders
