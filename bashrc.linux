@@ -22,5 +22,13 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
 fi
 #}}}
+# Using Powerline #{{{
+if [ -f `which powerline-daemon` ]; then
+    powerline-daemon -q
+    POWERLINE_BASH_CONTINUATION=1
+    POWERLINE_BASH_SELECT=1
+fi
+dsPowerlineRC='/usr/share/powerline/bash/powerline.sh'
+[[ -f "${dsPowerlineRC}" ]] && source "${dsPowerlineRC}";
+#}}}
 # ----------------------------------------------------------------------------
-
