@@ -9,16 +9,18 @@
 
 # ----------------------------------------------------------------------------
 # PATH #{{{
-# B1FreeArchiver
-PATH="/Applications/B1FreeArchiver.app/Contents/MacOS:${PATH}"
-
-# MacPorts
-PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
-
-# MySQL (OSX Builtin)
-PATH="/usr/local/:/usr/local/sbin:/usr/local/mysql/bin:${PATH}"
-
-PATH="${HOME}/bin:${PATH}"
+for p in "/Applications/B1FreeArchiver.app/Contents/MacOS" \
+    "/opt/local/bin" \
+    "/opt/local/sbin" \
+    "/usr/local/bin" \
+    "/usr/local/sbin" \
+    "/usr/local/mysql/bin" \
+    "$HOME/.local/bin" \
+    "$HOME/bin"; do
+    if ! [[ "$PATH" =~ "${p}:" ]]; then
+        [[ -d "${p}" ]] && PATH="${p}:${PATH}"
+    fi
+done
 export PATH
 #}}}
 # Add color to terminal #{{{
