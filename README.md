@@ -31,6 +31,36 @@ To list all available aliases:
 $ ds.aliasLall
 ```
 
+To list which OS aliases are being loaded:
+
+```
+$ ds.alias_loaded
+```
+
+To list the loaded Linux aliases:
+
+```
+$ ds.alias_linux
+```
+
+To list the loaded MacOSX aliases:
+
+```
+$ ds.alias_mac
+```
+
+To list the loaded MacLin aliases:
+
+```
+$ ds.alias_maclin
+```
+
+To search through loaded aliases:
+
+```
+ds.alias_search [KEYWORD]
+```
+
 ### The idea of dsBash
 To have an easy way to setup your bash environment cross your `Linux` distros and `MacOSX` to act the way you used to, and have your custom aliases
 
