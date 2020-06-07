@@ -22,7 +22,6 @@ ds.alias_linux() {
 } #}}}
 
 # ------------------------------------------------------------------------------
-
 # Files & Folders #{{{
 # ds.du:            du with hidden files/dirs #{{{
 # http://askubuntu.com/questions/356902/why-doesnt-this-show-the-hidden-files-folders
@@ -53,6 +52,7 @@ ds.info() {
     echo ''
 } #}}}
 #}}}
-
 # ------------------------------------------------------------------------------
-
+# Auto flags
+alias ls='ls --color=auto'          # Adding colors
+# ------------------------------------------------------------------------------

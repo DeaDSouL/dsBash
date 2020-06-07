@@ -159,3 +159,9 @@ ds.info() {
 #   then use: ~/Dev/Perl/randBytes 1048576 > 10MB.dat
 
 #   More : http://natelandau.com/my-mac-osx-bash_profile/
+
+
+
+
+# Auto flags
+alias ls='ls -G'          # Adding colors

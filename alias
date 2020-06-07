@@ -49,7 +49,6 @@ alias l='ls -CF'
 #}}}
 
 # Auto flags
-alias ls='ls --color=auto'          # Adding colors
 alias grep='grep --color=auto'      # Adding colors
 alias fgrep='fgrep --color=auto'    # Adding colors
 alias egrep='egrep --color=auto'    # Adding colors
