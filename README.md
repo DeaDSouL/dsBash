@@ -12,6 +12,7 @@ I'm using the Vim's `marker` method to fold/unfold sections in the source code. 
 ```
 :set foldmethod=marker
 ```
+To toggle folding use `za`.
 
 ### Installation
 Once you cloned the repo, do the following
@@ -32,43 +33,36 @@ That's it :)
 ### How to use it?
 
 To list all available aliases:
-
 ```
 $ ds.alias_all
 ```
 
 To list which OS aliases are being loaded:
-
 ```
 $ ds.alias_loaded
 ```
 
 To list the loaded Linux aliases:
-
 ```
 $ ds.alias_linux
 ```
 
 To list the loaded MacOSX aliases:
-
 ```
 $ ds.alias_mac
 ```
 
 To list the loaded MacLin aliases:
-
 ```
 $ ds.alias_maclin
 ```
 
 To search through loaded aliases:
-
 ```
 $ ds.alias_search [KEYWORD]
 ```
 
 E.g: Searching for work 'kill':
-
 ```
 [deadsoul@workstation ~]$ ds.alias_search kill
            ds.k9 :    Kill 9 process by process-id.
