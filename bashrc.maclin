@@ -1,4 +1,4 @@
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker
 # ----------------------------------------------------------------------------
 #  Author: Mubarak Alrashidi (DeaDSouL)
 # Package: dsBash
@@ -7,13 +7,42 @@
 #     URL: https://github.com/DeaDSouL/dsBash
 # ----------------------------------------------------------------------------
 
+# .bash_history things
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+# HISTCONTROL     is a colon-separated list of values controlling how 
+#                 commands are saved in the 
+# ignorespace	= don’t save lines which begin with a <space> character
+# ignoredups	= don’t save lines matching the previous history entry
+# ignoreboth	= use both ‘ignorespace’ and ‘ignoredups’
+# erasedups	= eliminate duplicates across the whole history
+export HISTCONTROL=ignoreboth
+
+# Ignore Specific Commands
+# HISTIGNORE      is a colon-separated list of patterns used to decide 
+#                 which command lines should be saved in the history file.
+# ex:
+#     export HISTIGNORE="ls:ps:history"
+#     export HISTIGNORE="s*"
+
+# Use one command per line
+# Store multi-line commands in one history entry:
+shopt -s cmdhist
+
+# Change the History File Name
+# if you want to use something else than '.bash_history'
+#export HISTFILE=~/.custom_file
 
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=9999999
-HISTFILESIZE=9999999
+export HISTSIZE=9999999
+export HISTFILESIZE=9999999
+
+# Add date & time
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
 
 # ----------------------------------------------------------------------------
 
