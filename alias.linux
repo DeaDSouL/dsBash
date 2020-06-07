@@ -1,4 +1,4 @@
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker
 # ----------------------------------------------------------------------------
 #  Author: Mubarak Alrashidi (DeaDSouL)
 # Package: dsBash
@@ -7,27 +7,38 @@
 #     URL: https://github.com/DeaDSouL/dsBash
 # ----------------------------------------------------------------------------
 
+# ds.alias_linux:   Show available LINUX aliases #{{{
 ds.alias_linux() {
-    # echo ""
-    # echo "L I N U X :"
-    # echo "-----------"
+    echo ""
+    echo -e "${BRED}L I N U X :${NC}"
+    echo -e "${BRED}-----------${NC}"
 
-    # echo "FILE AND FOLDER MANAGEMENT"
+    echo -e "${BRED}FILE AND FOLDER MANAGEMENT"
     echo -e "           ${BBLUE}ds.du${NC} ${FG}:    ${NC}${PURPLE}'du'${NC} ${FG}with hidden files.${NC}"
-    # echo ""
+    echo ""
 
+    echo -e "${BRED}MISC."
     echo -e "         ${BBLUE}ds.info${NC} ${FG}:    Print some useful system's informaton.${NC}"
-}
-
+} #}}}
 
 # ------------------------------------------------------------------------------
 
+# Files & Folders #{{{
+# ds.du:            du with hidden files/dirs #{{{
 # http://askubuntu.com/questions/356902/why-doesnt-this-show-the-hidden-files-folders
 alias ds.du='du -sch .[!.]* * |sort -h'
-
-# ------------------------------------------------------------------------------
-
-# display useful host related informaton
+#}}}
+#}}}
+# Searching #{{{
+#}}}
+# Process management #{{{
+#}}}
+# Networking #{{{
+#}}}
+# System Operations & Information #{{{
+#}}}
+# Misc. #{{{
+# ds.info:          display useful host related informaton #{{{
 ds.info() {
     echo -e "\n${BGREEN}You are logged on ${NC}${FG}$HOSTNAME"
     echo -e "\n${BGREEN}Additionnal information:${NC}${FG} " ; uname -a
@@ -40,17 +51,8 @@ ds.info() {
     # MacOSX
     #echo -e "\n${BGREEN}DNS Configuration:${NC}${FG} " ; scutil --dns
     echo ''
-}
+} #}}}
+#}}}
 
 # ------------------------------------------------------------------------------
-
-# 
-
-# ------------------------------------------------------------------------------
-
-# 
-
-# ------------------------------------------------------------------------------
-
-# 
 
