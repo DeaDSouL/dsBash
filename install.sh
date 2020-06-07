@@ -9,7 +9,7 @@
 # ----------------------------------------------------------------------------
 # .bash_profile --> This is the first file to be checked in MacOS.
 # .profile -------> This is the first file to be checked in Linux.
-# .bashrc --------> This is the most used file to configure bash.
+# .bashrc --------> This is the configuration file for bash.
 # .bash_profile <- .profile <- .bashrc <- dsBash/bashrc
 # ---------------------------------------------------------------------
 
