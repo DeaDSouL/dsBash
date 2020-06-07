@@ -49,8 +49,13 @@ alias l='ls -CF'
 #}}}
 
 # Auto flags
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias ls='ls --color=auto'          # Adding colors
+alias grep='grep --color=auto'      # Adding colors
+alias fgrep='fgrep --color=auto'    # Adding colors
+alias egrep='egrep --color=auto'    # Adding colors
 
+alias cp="cp -i"                    # confirm before overwriting something
+alias df='df -h'                    # human-readable sizes
+alias free='free -m'                # show sizes in MB
+alias more=less
 # ----------------------------------------------------------------------------
