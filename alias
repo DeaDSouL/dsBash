@@ -20,7 +20,7 @@ ds.alias_all() {
     echo -e "  ${BBLUE}ds.alias_linux${NC} ${FG}:    Listing the available Linux aliases."
     echo -e "    ${BBLUE}ds.alias_mac${NC} ${FG}:    Listing the available MacOSX aliases."
     echo -e " ${BBLUE}ds.alias_maclin${NC} ${FG}:    Listing the available both aliases."
-    echo -e " ${BBLUE}ds.alias_search${NC} ${FG}:    Show info about alias.${NC} ${YELLOW}(ex: ds.alias_search ds.findtext)${NC}"
+    echo -e " ${BBLUE}ds.alias_search${NC} ${FG}:    Search or show info about alias.${NC} ${YELLOW}(ex: ds.alias_search ds.findtext)${NC}"
     echo ""
     [[ "$load_linux" = true ]] && ds.alias_linux;
     [[ "$load_mac" = true ]] && ds.alias_mac;
