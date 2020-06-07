@@ -1,4 +1,4 @@
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 foldmethod=marker
 # ----------------------------------------------------------------------------
 #  Author: Mubarak Alrashidi (DeaDSouL)
 # Package: dsBash
@@ -7,53 +7,50 @@
 #     URL: https://github.com/DeaDSouL/dsBash
 # ----------------------------------------------------------------------------
 
+# ds.alias_loaded:  Show the loaded aliases OS type #{{{
 ds.alias_loaded() {
     [[ "$load_linux" = true ]] && echo -e " Linux : ${BGREEN}True${NC}" || echo -e " Linux : ${BRED}False${NC}"
     [[ "$load_mac" = true ]] && echo -e " MacOS : ${BGREEN}True${NC}" || echo -e " MacOS : ${BRED}False${NC}"
     [[ "$load_maclin" = true ]] && echo -e "MacLin : ${BGREEN}True${NC}" || echo -e "MacLin : ${BRED}False${NC}"
-}
-
-# ----------------------------------------------------------------------------
-
+} #}}}
+# ds.alias_all:     Show all available aliases #{{{
 ds.alias_all() {
-    # echo -e "${BRED}Main Commands:"
+    echo -e "${BRED}Main Commands:"
     echo -e " ${BBLUE}ds.alias_loaded${NC} ${FG}:    Showing the loaded aliases."
     echo -e "  ${BBLUE}ds.alias_linux${NC} ${FG}:    Listing the available Linux aliases."
     echo -e "    ${BBLUE}ds.alias_mac${NC} ${FG}:    Listing the available MacOSX aliases."
     echo -e " ${BBLUE}ds.alias_maclin${NC} ${FG}:    Listing the available both aliases."
-    echo -e "   ${BBLUE}ds.alias_info${NC} ${FG}:    Show info about alias.${NC} ${YELLOW}(ex: ds.alias_info ds.findtext)${NC}"
-    # echo ""
+    echo -e " ${BBLUE}ds.alias_search${NC} ${FG}:    Show info about alias.${NC} ${YELLOW}(ex: ds.alias_search ds.findtext)${NC}"
+    echo ""
     [[ "$load_linux" = true ]] && ds.alias_linux;
     [[ "$load_mac" = true ]] && ds.alias_mac;
     [[ "$load_maclin" = true ]] && ds.alias_maclin;
-}
-
-# ----------------------------------------------------------------------------
-
-ds.alias_info() {
-    #ds.alias_all | grep -i "^$1" || echo 'invalid input! Try: ds.alias_all'
-    ds.alias_all | grep -i "$1" || echo 'invalid input! Try: ds.alias_all'
-}
-
-# ----------------------------------------------------------------------------
-
-# Shortcut to ds.aliasl_all
+} #}}}
+# ds.:              Shortcut to ds.aliasl_all #{{{
 ds.() {
     ds.alias_all
-}
+} #}}}
+# ds.alias_search:  Search for alias #{{{
+ds.alias_search() {
+    if [[ -z "$1" ]]; then
+        echo 'invalid input! Try: ds.alias_all'
+    else
+        ds.alias_all | grep -i "$1" || echo 'Nothing found'
+    fi
+} #}}}
 
 # ----------------------------------------------------------------------------
 
-# Misc aliases
-
-# More Colors
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# Better ls
+# Files & Folders
+# Better ls #{{{
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+#}}}
+
+# Auto flags
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # ----------------------------------------------------------------------------
