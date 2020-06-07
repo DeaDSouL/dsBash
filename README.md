@@ -58,7 +58,16 @@ $ ds.alias_maclin
 To search through loaded aliases:
 
 ```
-ds.alias_search [KEYWORD]
+$ ds.alias_search [KEYWORD]
+```
+
+E.g: Searching for work 'kill':
+
+```
+[deadsoul@workstation ~]$ ds.alias_search kill
+           ds.k9 :    Kill 9 process by process-id.
+          ds.k9n :    Kill 9 process by process-name.
+       ds.k9user :    Kill 9 user by user-name.
 ```
 
 ### The idea of dsBash
