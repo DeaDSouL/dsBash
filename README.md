@@ -7,6 +7,12 @@ Your smart organized Linux &amp; MacOSX bash configurations
 Package: dsBash
 
 
+### Source note:
+I'm using the Vim's `marker` method to fold/unfold sections in the source code. To enable it, edit any file with Vim, then type:
+```
+:set foldmethod=marker
+```
+
 ### Installation
 Once you cloned the repo, do the following
 
