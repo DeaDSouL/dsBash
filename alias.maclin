@@ -67,6 +67,7 @@ ds.alias_maclin() { #{{{
     echo -e "       ${BBLUE}ds.colors${NC} ${FG}:    Prints the terminal's colors.${NC}"
     echo -e "       ${BBLUE}ds.tophis${NC} ${FG}:    Shows which commands you use the most (based on .bash_history entries).${NC}"
     echo -e "         ${BBLUE}ds.path${NC} ${FG}:    Echo all executable Paths.${NC}"
+    echo -e "     ${BBLUE}ds.path_add${NC} ${FG}:    Temporary add location to \$PATH (e.g: ds.path_add $HOME/bin2).${NC}"
     echo ""
 } #}}}
 
@@ -386,6 +387,13 @@ alias ds.tophis='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | hea
 # ds.path:          Echo all executable Paths. #{{{
 alias ds.path='echo -e ${PATH//:/\\n}'
 #}}}
+# ds.path_add:      Temporary add location to $PATH (e.g: ds.path_add $HOME/bin2) #{{{
+ds.path_add() {
+    if ! [[ "$PATH" =~ "${1}:" ]]; then
+        [[ -d "${1}" ]] && PATH="${1}:${PATH}"
+    fi
+    export PATH
+} #}}}
 #}}}
 
 # ------------------------------------------------------------------------------
