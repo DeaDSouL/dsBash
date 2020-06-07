@@ -28,7 +28,7 @@ That's it :)
 To list all available aliases:
 
 ```
-$ ds.aliasLall
+$ ds.alias_all
 ```
 
 To list which OS aliases are being loaded:
