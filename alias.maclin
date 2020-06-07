@@ -64,7 +64,8 @@ ds.alias_maclin() { #{{{
     echo ""
 
     echo -e "${BRED}MISC."
-    echo -e "       ${BBLUE}ds.tophis${NC} ${FG}:    Show which commands you use the most.${NC}"
+    echo -e "       ${BBLUE}ds.colors${NC} ${FG}:    Prints the terminal's colors.${NC}"
+    echo -e "       ${BBLUE}ds.tophis${NC} ${FG}:    Shows which commands you use the most (based on .bash_history entries).${NC}"
     echo -e "         ${BBLUE}ds.path${NC} ${FG}:    Echo all executable Paths.${NC}"
     echo ""
 } #}}}
@@ -352,6 +353,33 @@ ds.cleands() {
 } #}}}
 #}}}
 # Misc. #{{{
+# ds.colors:        Prints the terminal's colors #{{{
+ds.colors() {
+    local fgc bgc vals seq0
+
+    printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+    printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+    printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+    printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+
+    # foreground colors
+    for fgc in {30..37}; do
+        # background colors
+        for bgc in {40..47}; do
+            fgc=${fgc#37} # white
+            bgc=${bgc#40} # black
+
+            vals="${fgc:+$fgc;}${bgc}"
+            vals=${vals%%;}
+
+            seq0="${vals:+\e[${vals}m}"
+            printf "  %-9s" "${seq0:-(default)}"
+            printf " ${seq0}TEXT\e[m"
+            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+        done
+        echo; echo
+    done
+} #}}}
 # ds.tophis:        Show which commands you use the most. #{{{
 alias ds.tophis='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
 #}}}
