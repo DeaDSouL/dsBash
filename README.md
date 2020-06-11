@@ -80,7 +80,7 @@ To search through loaded aliases:
 $ ds.alias_search [KEYWORD]
 ```
 
-E.g: Searching for work 'kill':
+E.g: Searching for keyword 'kill':
 ```
 $ ds.alias_search kill
            ds.k9 :    Kill 9 process by process-id.
