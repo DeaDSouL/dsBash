@@ -1,3 +1,7 @@
+# IMPORTANT
+The repository has been moved to [GitLab.com/DeaDSouL/dsBash](https://gitlab.com/DeaDSouL/dsBash).
+
+
 # dsBash
 Your smart organized Linux &amp; MacOSX bash configurations
 
