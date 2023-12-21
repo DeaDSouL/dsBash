@@ -5,7 +5,7 @@
 # Package: dsBash
 #    Info: Setting up your bash environment
 # License: GNU/GPL v3
-#     URL: https://github.com/DeaDSouL/dsBash
+#     URL: https://gitlab.com/DeaDSouL/dsBash
 # ----------------------------------------------------------------------------
 # .bash_profile --> This is the first file to be checked in MacOS.
 # .profile -------> This is the first file to be checked in Linux.
